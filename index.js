@@ -1,8 +1,10 @@
 const app = require('express')()
 const port = process.env.PORT || 8000
+const SnowTransfer = require('snowtransfer')
+const client = new SnowTransfer(process.env.DISCORD_TOKEN)
 
-app.get('/', (req, res) => {
-  res.json({ error: false, code: 200, message: 'It\'s alive!' })
+app.get('/contributors', (req, res) => {
+
 })
 
 app.listen(port)
