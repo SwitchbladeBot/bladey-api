@@ -4,8 +4,10 @@
   "description": "API consumed by the Switchblade website",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+    "start-dev": "nodemon --exec node -r dotenv/config index.js",
+    "test": "standard",
+    "fix": "standard --fix"
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,12 @@
   "dependencies": {
     "express": "^4.16.3",
     "mongoose": "^5.2.3",
-    "mongoose-findorcreate": "^3.0.0"
+    "mongoose-findorcreate": "^3.0.0",
+    "snowtransfer": "^0.2.4"
+  },
+  "devDependencies": {
+    "dotenv": "^6.0.0",
+    "nodemon": "^1.18.2",
+    "standard": "^11.0.1"
   }
 }
