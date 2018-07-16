@@ -10,30 +10,26 @@ app.use(cors())
 // TODO: Optimize this method to only display the informaiton we need
 app.get('/contributors', async (req, res) => {
   const roles = await client.guild.getGuildRoles(process.env.BOT_GUILD)
-  const members = await client.guild.getGuildMembers(process.env.BOT_GUILD, {limit: 1000})
-  const rolesToDisplay = roles.filter(r => r.hoist).sort((a, b) => {return b.position - a.position})
+  const members = await client.guild.getGuildMembers(process.env.BOT_GUILD, { limit: 1000 })
 
-  const contributors = members.filter(m => {
-    return m.roles.some(r => {
-      return rolesToDisplay.map(r => r.id).includes(r)
-    })
-  })
+  const alreadyFound = []
+  const contributorRoles = roles
+    .filter(r => r.hoist)
+    .sort((a, b) => b.position - a.position)
+    .map(role => {
+      return {
+        id: role.id,
+        name: role.name,
+        members: members.map(member => {
+          if (member.roles.includes(role.id) && !member.user.bot && !alreadyFound.includes(member.user.id)) {
+            alreadyFound.push(member.user.id)
+            return member.user
+          }
+        }).filter(u => u)
+      }
+    }).filter(r => r.members.length > 0)
 
-  let alreadyFound = []
-
-  const contributorList = rolesToDisplay.map(r => {
-    return {
-      roleName: r.name,
-      roleId: r.id,
-      people: contributors.filter(c => {
-        if (c.roles.includes(r.id) && !c.user.bot && !alreadyFound.includes(c.user.id)) {
-          alreadyFound.push(c.user.id)
-          return true
-        } else return false
-      })
-    }
-  }).filter(r => {return r.people.length > 0})
-  res.json(contributorList)
+  res.json({roles: contributorRoles})
 })
 
 app.listen(port)
