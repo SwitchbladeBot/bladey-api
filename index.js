@@ -1,7 +1,10 @@
 const app = require('express')()
+const cors = require('cors')
 const port = process.env.PORT || 8000
 const SnowTransfer = require('snowtransfer')
 const client = new SnowTransfer(process.env.DISCORD_TOKEN)
+
+app.use(cors())
 
 // TODO: Use a method that doesn't break when we reach 1000 members
 // TODO: Optimize this method to only display the informaiton we need
@@ -21,6 +24,7 @@ app.get('/contributors', async (req, res) => {
   const contributorList = rolesToDisplay.map(r => {
     return {
       roleName: r.name,
+      roleId: r.id,
       people: contributors.filter(c => {
         if (c.roles.includes(r.id) && !c.user.bot && !alreadyFound.includes(c.user.id)) {
           alreadyFound.push(c.user.id)
