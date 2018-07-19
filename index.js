@@ -4,7 +4,7 @@ const cors = require('cors')
 const port = process.env.PORT || 8000
 
 // Load Routers
-const contributors = require('./routers/contributors.js')
+const { contributors } = require('./routers/')
 
 // Use CORS with Express
 app.use(cors())
