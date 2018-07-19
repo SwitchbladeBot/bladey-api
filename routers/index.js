@@ -1,3 +1,3 @@
 module.exports = {
-  contributors: require('./contributors')
+  contributors: require('./contributors/')
 }
