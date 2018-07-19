@@ -21,10 +21,10 @@
   "homepage": "https://github.com/SwitchbladeBot/bladey-api#readme",
   "dependencies": {
     "cors": "^2.8.4",
+    "discord.js": "^11.3.2",
     "express": "^4.16.3",
     "mongoose": "^5.2.3",
-    "mongoose-findorcreate": "^3.0.0",
-    "snowtransfer": "^0.2.4"
+    "mongoose-findorcreate": "^3.0.0"
   },
   "devDependencies": {
     "dotenv": "^6.0.0",
