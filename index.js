@@ -1,36 +1,16 @@
+// Load Express and CORS
 const app = require('express')()
 const cors = require('cors')
 const port = process.env.PORT || 8000
-const SnowTransfer = require('snowtransfer')
-const client = new SnowTransfer(process.env.DISCORD_TOKEN)
 
+// Load Routers
+const contributors = require('./routers/contributors.js')
+
+// Use CORS with Express
 app.use(cors())
 
-// TODO: Use a method that doesn't break when we reach 1000 members
-// TODO: Optimize this method to only display the informaiton we need
-app.get('/contributors', async (req, res) => {
-  const roles = await client.guild.getGuildRoles(process.env.BOT_GUILD)
-  const members = await client.guild.getGuildMembers(process.env.BOT_GUILD, { limit: 1000 })
+// Point contributors route to uri/contributors
+app.use('/contributors', contributors)
 
-  const alreadyFound = []
-  const contributorRoles = roles
-    .filter(r => r.hoist)
-    .sort((a, b) => b.position - a.position)
-    .map(role => {
-      return {
-        id: role.id,
-        name: role.name,
-        members: members.map(member => {
-          if (member.roles.includes(role.id) && !member.user.bot && !alreadyFound.includes(member.user.id)) {
-            alreadyFound.push(member.user.id)
-            return member.user
-          }
-        }).filter(u => u)
-      }
-    }).filter(r => r.members.length > 0)
-
-  res.json({roles: contributorRoles})
-})
-
-app.listen(port)
-console.log(`Listening on port ${port}...`)
+// Start application with port 8000 or process.env.PORT
+app.listen(port, () => { console.log(`Listening on port ${port}`) })
