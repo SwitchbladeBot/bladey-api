@@ -1,5 +1,6 @@
 // Load Express, CORS and discord.js
-const app = require('express')()
+const express = require('express')
+const app = express()
 const cors = require('cors')
 const { Client } = require('discord.js')
 
@@ -29,6 +30,8 @@ module.exports = class Wrapper extends Client {
 
     // Use CORS with Express
     app.use(cors())
+    // Parse JSON body
+    app.use(express.json())
 
     // Listen to chosen web port
     app.listen(port, () => {
