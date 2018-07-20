@@ -13,9 +13,8 @@ const { Route, FileUtils } = require('./')
 module.exports = class Wrapper extends Client {
   constructor (options = {}) {
     super(options)
-    this.app = {}
-    this.routes = {}
-    this.initializeRoutes('src/routers/')
+    this.app = null
+    this.routes = []
   }
 
   /**
@@ -25,6 +24,9 @@ module.exports = class Wrapper extends Client {
    * @returns {Promise<string>} - Token of the account used
    */
   start (port, token) {
+    port = port || this.options.port || 8000
+    token = token || this.options.token
+
     // Use CORS with Express
     app.use(cors())
 
@@ -35,7 +37,9 @@ module.exports = class Wrapper extends Client {
     })
 
     // Log in the client
-    return super.login(token)
+    return this.login(token).then(t => {
+      this.initializeRoutes('src/routes/').then(() => t)
+    })
   }
 
   // Helpers
@@ -63,38 +67,28 @@ module.exports = class Wrapper extends Client {
   // Routes
 
   /**
-   * Adds a new route to the wrapper
+   * Adds a new route to the API
    * @param {Route} route - Route to be added
    */
   addRoute (route) {
     if (route instanceof Route && route.canLoad()) {
-      this.routes.push(route)
-      app.use(`/${route.name}`, route.path)
+      const router = route.load()
+      if (router) {
+        this.routes.push(route)
+        app.use(route.path, router)
+      }
     }
   }
 
   /**
-   * Initializes all wrapper routes
+   * Initializes all routes
    * @param {string} dirPath - Path to the routes directory
    */
   initializeRoutes (dirPath) {
     return FileUtils.requireDirectory(dirPath, (NewRoute) => {
-      if (Object.getPrototypeOf(NewRoute) !== Route || NewRoute.ignore) return
+      if (Object.getPrototypeOf(NewRoute) !== Route) return
       this.addRoute(new NewRoute(this))
       this.log(`${NewRoute.name} loaded.`, 'Routes')
     }, this.logError)
   }
 }
-
-/* // Load Routers
-const { contributors } = require('./routers/')
-
-// Use CORS with Express
-app.use(cors())
-
-// Point contributors route to uri/contributors
-app.use('/contributors', contributors)
-
-// Start application with port 8000 or process.env.PORT
-app.listen(port, () => { console.log(`Listening on port ${port}`) })
-*/

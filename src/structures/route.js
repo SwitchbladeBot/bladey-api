@@ -1,7 +1,8 @@
 /**
  * Base route structure
  * @constructor
- * @param {Wrapper} wrapper - API Wrapper
+ * @param {Client} client - discord.js Client
+ * @param {Route} parentRoute - parent route to inherit path
  */
 module.exports = class Route {
   constructor (client, parentRoute) {
@@ -9,8 +10,20 @@ module.exports = class Route {
 
     this.name = 'RouteName'
 
-    this.requirements = null // Run requirements
+    this.requirements = null
     this.parentRoute = parentRoute
+  }
+
+  get path () {
+    return `${this.parentRoute || ''}/${this.name}`
+  }
+
+  /**
+   * Return an express Router with routes information
+   * @returns {express.Router}
+   */
+  load () {
+    return null
   }
 
   /**
@@ -20,15 +33,11 @@ module.exports = class Route {
   canLoad () {
     return true
   }
-  /*
-  path () {
-
-  } */
 
   /**
    * Returns true if it can run
    * @param {Array<string>} args - Request arguments
-   * @returns {boolean} Whether this command can run
+   * @returns {boolean} Whether this route can run
    */
   handleRequirements (args) {
     return this.requirements ? this.requirements.handle(args) : true

@@ -1,6 +1,5 @@
-const { Route } = require('../../index')
-const express = require('express')
-const router = express.Router()
+const { Route } = require('../index')
+const { Router } = require('express')
 
 module.exports = class Contributors extends Route {
   constructor (client) {
@@ -8,10 +7,13 @@ module.exports = class Contributors extends Route {
     this.name = 'contributors'
   }
 
-  path () {
+  load () {
+    const router = Router()
+
     router.get('/', async (req, res) => {
-      const roles = this.client.guilds.get(process.env.BOT_GUILD).roles
-      const members = this.client.guilds.get(process.env.BOT_GUILD).members
+      const guild = this.client.guilds.get(process.env.BOT_GUILD)
+      const roles = guild.roles
+      const members = guild.members
 
       const alreadyFound = []
       const contributorRoles = roles
@@ -22,9 +24,11 @@ module.exports = class Contributors extends Route {
             id: role.id,
             name: role.name,
             members: members.map(member => {
-              if (member.roles.includes(role.id) && !member.user.bot && !alreadyFound.includes(member.id)) {
+              if (member.roles.has(role.id) && !member.user.bot && !alreadyFound.includes(member.id)) {
                 alreadyFound.push(member.id)
-                return member.user
+                const { id, user: { username, discriminator, avatar } } = member
+                // return { id, username, discriminator, avatar }
+                return { username, discriminator, id, avatar }
               }
             }).filter(u => u)
           }
@@ -32,5 +36,7 @@ module.exports = class Contributors extends Route {
 
       res.json({roles: contributorRoles})
     })
+
+    return router
   }
 }
