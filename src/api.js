@@ -32,6 +32,9 @@ module.exports = class Wrapper extends Client {
     app.use(cors())
     // Parse JSON body
     app.use(express.json())
+    // Use 'docs' folder as actual documentation purposes
+    console.log(__dirname)
+    app.use(express.static(`${__dirname}/docs`))
 
     // Listen to chosen web port
     app.listen(port, () => {

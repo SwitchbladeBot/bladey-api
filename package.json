@@ -9,6 +9,11 @@
     "test": "standard",
     "fix": "standard --fix"
   },
+  "apidoc": {
+    "title": "Switchblade API Documentation",
+    "description": "API consumed by the Switchblade website",
+    "url": "https://api.switchblade.xyz"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SwitchbladeBot/bladey-api.git"
@@ -27,6 +32,7 @@
     "mongoose-findorcreate": "^3.0.0"
   },
   "devDependencies": {
+    "apidoc": "^0.17.6",
     "dotenv": "^6.0.0",
     "nodemon": "^1.18.2",
     "standard": "^11.0.1"

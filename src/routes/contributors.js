@@ -10,6 +10,27 @@ module.exports = class Contributors extends Route {
   load () {
     const router = Router()
 
+    /**
+     * @api {get} /contributors Request all Switchblade contributors
+     * @apiName GetContributors
+     * @apiGroup Contributors
+     *
+     * @apiSuccess {Object} roles Contributor roles and all members that are in them, ordered from top to bottom
+     *
+     * @apiSuccessExample Success-Response:
+     *     HTTP/1.1 200 OK
+     *     {
+     *       "roles": [
+     *         "id": "445204054168174602",
+     *         "name": "Back-end Developers",
+     *         "members": [
+     *           (...)
+     *         ]
+     *       ], [
+     *         (...)
+     *       ]
+     *     }
+     */
     router.get('/', async (req, res) => {
       const guild = this.client.guilds.get(process.env.BOT_GUILD)
       const roles = guild.roles
