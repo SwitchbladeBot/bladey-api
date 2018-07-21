@@ -39,12 +39,11 @@ module.exports = class Guilds extends Route {
      *
      * @apiError GuildNotFound Guild not found
      *
-     * @apiErrorExample Error-Response: {
+     * @apiErrorExample Error-Response:
      *    HTTP/1.1 404 Not Found
      *    {
      *      "error": "Guild not found"
      *    }
-     * }
      */
     router.get('/members/:guildId', async (req, res) => {
       const guild = this.client.guilds.get(req.params.guildId)

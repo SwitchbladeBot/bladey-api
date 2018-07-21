@@ -81,8 +81,8 @@ define({ "api": [
       },
       "examples": [
         {
-          "title": "Error-Response: {",
-          "content": "   HTTP/1.1 404 Not Found\n   {\n     \"error\": \"Guild not found\"\n   }\n}",
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"Guild not found\"\n}",
           "type": "json"
         }
       ]
