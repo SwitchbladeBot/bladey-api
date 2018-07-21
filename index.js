@@ -2,7 +2,9 @@
 const API = require('./src/api.js')
 const wrapper = new API({
   port: process.env.PORT,
-  token: process.env.DISCORD_TOKEN
+  token: process.env.DISCORD_TOKEN,
+  fetchAllMembers: true,
+  disableEveryone: true
 })
 
 // Initialize API
