@@ -22,6 +22,12 @@ module.exports = class Guilds extends Route {
       res.status(400).json({error: 'Invalid request'})
     })
 
+    router.get('/count/:id', async (req, res) => {
+      const guild = this.client.guilds.get(req.params.id)
+      if (!guild) return res.status(400).json({error: 'Guild not found'})
+      else return res.json(guild.members.size)
+    })
+
     return router
   }
 }
