@@ -23,17 +23,21 @@ module.exports = class Guilds extends Route {
     })
 
     /**
-     * @api {get} /guild/members/:guildId Request guild member count
+     * @api {get} /guilds/members/:guildId Request guild member count
      * @apiName GetGuildMemberCount
      * @apiGroup Guilds
      *
      * @apiParam {String} guildId Guild ID
      *
+     * @apiSuccess {String} name Guild Name
+     * @apiSuccess {String} icon Guild Icon URL
      * @apiSuccess {Number} members Current members that guild has
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
      *     {
+     *       "name": "Guild Name",
+     *       "icon": "Guild Icon URL",
      *       "members": 350
      *     }
      *
@@ -48,7 +52,7 @@ module.exports = class Guilds extends Route {
     router.get('/members/:guildId', async (req, res) => {
       const guild = this.client.guilds.get(req.params.guildId)
       if (!guild) return res.status(404).json({error: 'Guild not found'})
-      else return res.json({members: guild.members.size})
+      else return res.json({name: guild.name, icon: guild.iconURL, members: guild.members.size})
     })
 
     return router

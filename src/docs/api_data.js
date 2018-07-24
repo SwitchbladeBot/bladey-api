@@ -31,7 +31,7 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/guild/members/:guildId",
+    "url": "/guilds/members/:guildId",
     "title": "Request guild member count",
     "name": "GetGuildMemberCount",
     "group": "Guilds",
@@ -53,6 +53,20 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Guild Name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "icon",
+            "description": "<p>Guild Icon URL</p>"
+          },
+          {
+            "group": "Success 200",
             "type": "Number",
             "optional": false,
             "field": "members",
@@ -63,7 +77,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"members\": 350\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  \"name\": \"Guild Name\",\n  \"icon\": \"Guild Icon URL\",\n  \"members\": 350\n}",
           "type": "json"
         }
       ]
