@@ -20,7 +20,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"roles\": [\n    \"id\": \"445204054168174602\",\n    \"name\": \"Back-end Developers\",\n    \"members\": [\n      (...)\n    ]\n  ], [\n    (...)\n  ]\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  \"roles\": [\n    {\n      \"id\": \"445204054168174602\",\n      \"name\": \"Back-end Developers\",\n      \"members\": [\n        {\n          \"id\": \"135152303773712384\",\n          \"username\": \"davipatury\",\n          \"discriminator\": \"5570\",\n          \"avatar\": \"38ea62493b1b22541426b99d835b87ba\",\n          \"status\": \"online\",\n        },\n        (...)\n      ]\n    },\n    (...)\n  ]\n}",
           "type": "json"
         }
       ]
@@ -55,6 +55,13 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
+            "field": "id",
+            "description": "<p>Guild ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
             "field": "name",
             "description": "<p>Guild Name</p>"
           },
@@ -69,15 +76,15 @@ define({ "api": [
             "group": "Success 200",
             "type": "Number",
             "optional": false,
-            "field": "members",
-            "description": "<p>Current members that guild has</p>"
+            "field": "memberCount",
+            "description": "<p>Current guild's member count</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"name\": \"Guild Name\",\n  \"icon\": \"Guild Icon URL\",\n  \"members\": 350\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  \"id\": \"445203868624748555\"\n  \"name\": \"Switchblade Bot\",\n  \"icon\": \"ebdb8b08b366e6acc563e8d3e819bdf6\",\n  \"memberCount\": 350\n}",
           "type": "json"
         }
       ]
