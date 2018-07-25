@@ -29,17 +29,18 @@ module.exports = class Guilds extends Route {
      *
      * @apiParam {String} guildId Guild ID
      *
+     * @apiSuccess {String} id Guild ID
      * @apiSuccess {String} name Guild Name
      * @apiSuccess {String} icon Guild Icon URL
-     * @apiSuccess {Number} members Current members that guild has
+     * @apiSuccess {Number} memberCount Current guild's member count
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
      *     {
-     *       "name": "Guild Name",
-     *       "icon": "Guild Icon Hash",
-     *       "iconURL": "Guild Icon URL",
-     *       "members": 350
+     *       "id": "445203868624748555"
+     *       "name": "Switchblade Bot",
+     *       "icon": "ebdb8b08b366e6acc563e8d3e819bdf6",
+     *       "memberCount": 350
      *     }
      *
      * @apiError GuildNotFound Guild not found
@@ -52,8 +53,11 @@ module.exports = class Guilds extends Route {
      */
     router.get('/members/:guildId', async (req, res) => {
       const guild = this.client.guilds.get(req.params.guildId)
-      if (!guild) return res.status(404).json({error: 'Guild not found'})
-      else return res.json({name: guild.name, icon: guild.icon, iconURL: guild.iconURL, members: guild.members.size})
+      if (guild) {
+        const { id, name, icon, memberCount } = guild
+        return res.json({id, name, icon, memberCount})
+      }
+      res.status(404).json({error: 'Guild not found'})
     })
 
     return router

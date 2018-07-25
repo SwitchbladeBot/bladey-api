@@ -21,12 +21,20 @@ module.exports = class Contributors extends Route {
      *     HTTP/1.1 200 OK
      *     {
      *       "roles": [
-     *         "id": "445204054168174602",
-     *         "name": "Back-end Developers",
-     *         "members": [
-     *           (...)
-     *         ]
-     *       ], [
+     *         {
+     *           "id": "445204054168174602",
+     *           "name": "Back-end Developers",
+     *           "members": [
+     *             {
+     *               "id": "135152303773712384",
+     *               "username": "davipatury",
+     *               "discriminator": "5570",
+     *               "avatar": "38ea62493b1b22541426b99d835b87ba",
+     *               "status": "online",
+     *             },
+     *             (...)
+     *           ]
+     *         },
      *         (...)
      *       ]
      *     }
