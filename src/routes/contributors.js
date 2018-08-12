@@ -55,8 +55,8 @@ module.exports = class Contributors extends Route {
             members: members.map(member => {
               if (member.roles.has(role.id) && !member.user.bot && !alreadyFound.includes(member.id)) {
                 alreadyFound.push(member.id)
-                const { id, user: { username, discriminator, displayAvatarURL, presence: { status } } } = member
-                return { username, discriminator, id, avatar: displayAvatarURL, status }
+                const { id, user: { username, discriminator, avatar, presence: { status } } } = member
+                return { username, discriminator, id, avatar, status }
               }
             }).filter(u => u)
           }
