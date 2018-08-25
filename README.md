@@ -14,7 +14,7 @@
 **1. Clone your fork**
 ```bash
 git clone https://github.com/<your github username>/bladey-api
-cd bladey-web
+cd bladey-api
 ```
 
 **2. Install all the dependencies with NPM**
