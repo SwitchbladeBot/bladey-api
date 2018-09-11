@@ -60,6 +60,23 @@ module.exports = class Guilds extends Route {
       res.status(404).json({error: 'Guild not found'})
     })
 
+    router.ws('/members/:guildId', (ws, req) => {
+      const guild = this.client.guilds.get(req.params.guildId)
+      if (!guild) ws.close(404, 'Guild not found')
+      let count = guild.memberCount
+      ws.send(count)
+      this.client.on('guildMemberAdd', member => {
+        if (member.guild !== guild) return
+        count++
+        ws.send(count)
+      })
+      this.client.on('guildMemberRemove', member => {
+        if (member.guild !== guild) return
+        count--
+        ws.send(count)
+      })
+    })
+
     return router
   }
 }
