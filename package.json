@@ -30,7 +30,9 @@
     "discord.js": "^11.3.2",
     "express": "^4.16.3",
     "mongoose": "^5.2.3",
-    "mongoose-findorcreate": "^3.0.0"
+    "mongoose-findorcreate": "^3.0.0",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.5"
   },
   "devDependencies": {
     "apidoc": "^0.17.6",
