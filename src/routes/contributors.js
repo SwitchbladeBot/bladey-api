@@ -7,7 +7,7 @@ module.exports = class Contributors extends Route {
     this.name = 'contributors'
   }
 
-  load () {
+  register (app) {
     const router = Router()
 
     /**
@@ -65,6 +65,6 @@ module.exports = class Contributors extends Route {
       res.json({roles: contributorRoles})
     })
 
-    return router
+    app.use(this.path, router)
   }
 }

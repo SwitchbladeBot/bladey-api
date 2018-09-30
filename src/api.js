@@ -5,6 +5,7 @@ const cors = require('cors')
 const { Client } = require('discord.js')
 
 const { Route, FileUtils } = require('./')
+const { MongoDB } = require('./database')
 
 /**
  * API Wrapper
@@ -14,8 +15,10 @@ const { Route, FileUtils } = require('./')
 module.exports = class Wrapper extends Client {
   constructor (options = {}) {
     super(options)
-    this.app = null
+    this.app = app
     this.routes = []
+
+    this.initializeDatabase(MongoDB, { useNewUrlParser: true })
   }
 
   /**
@@ -77,12 +80,9 @@ module.exports = class Wrapper extends Client {
    * @param {Route} route - Route to be added
    */
   addRoute (route) {
-    if (route instanceof Route && route.canLoad()) {
-      const router = route.load()
-      if (router) {
-        this.routes.push(route)
-        app.use(route.path, router)
-      }
+    if (route instanceof Route) {
+      route._register(app)
+      this.routes.push(route)
     }
   }
 
@@ -96,5 +96,16 @@ module.exports = class Wrapper extends Client {
       this.addRoute(new NewRoute(this))
       this.log(`${NewRoute.name} loaded.`, 'Routes')
     }, this.logError)
+  }
+
+  // Database
+  initializeDatabase (DBWrapper, options = {}) {
+    this.database = new DBWrapper(options)
+    this.database.connect()
+      .then(() => this.log('Database connection established!', 'DB'))
+      .catch(e => {
+        this.logError(e.message, 'DB')
+        this.database = null
+      })
   }
 }
