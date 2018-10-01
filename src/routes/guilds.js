@@ -63,20 +63,13 @@ module.exports = class Guilds extends Route {
     router.ws('/members/:guildId', (ws, req) => {
       const guild = this.client.guilds.get(req.params.guildId)
       if (!guild) ws.close(404, 'Guild not found')
-      let count = guild.memberCount
-      ws.send(count)
-      const update = (member, shouldAdd) => {
-        if (member.guild !== guild) return
-        (shouldAdd) ? count++ : count--
-        ws.send(count)
-      }
-      const add = member => { update(member, true) }
-      const remove = member => { update(member, false) }
-      this.client.on('guildMemberAdd', add)
-      this.client.on('guildMemberRemove', remove)
+      const update = () => { ws.send(guild.memberCount) }
+      update()
+      this.client.on('guildMemberAdd', update)
+      this.client.on('guildMemberRemove', update)
       ws.on('close', () => {
-        this.client.removeListener('guildMemberAdd', add)
-        this.client.removeListener('guildMemberRemove', remove)
+        this.client.removeListener('guildMemberAdd', update)
+        this.client.removeListener('guildMemberRemove', update)
       })
     })
 
