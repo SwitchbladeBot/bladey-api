@@ -2,9 +2,9 @@
   <img src="https://i.imgur.com/iNV1ozh.png"><br>
   <b>API consumed by the <a href="https://switchblade.xyz/">Switchblade website</a></b><br> 
     <br>
-    <a href="https://support.switchblade.xyz/"><img src="https://img.shields.io/badge/dynamic/json.svg?label=chat%20on%20Discord&colorB=7289DA&url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Fservers%2F445203868624748555%2Fembed.json&query=%24.members.length&suffix=%20online" alt="Discord Server"/></a>
-    <a href="https://travis-ci.org/SwitchbladeBot/bladey-api"><img src="https://travis-ci.org/SwitchbladeBot/bladey-api.svg"/></a>
-    <a href="https://david-dm.org/SwitchbladeBot/bladey-api"><img src="https://david-dm.org/SwitchbladeBot/bladey-api/status.svg"/></a>
+    <a href="https://support.switchblade.xyz/"><img src="https://img.shields.io/badge/dynamic/json.svg?style=flat-square&label=chat%20on%20Discord&colorB=7289DA&url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Fservers%2F445203868624748555%2Fembed.json&query=%24.members.length&suffix=%20online" alt="Discord Server"/></a>
+    <a href="https://travis-ci.org/SwitchbladeBot/bladey-api"><img src="https://img.shields.io/travis/SwitchbladeBot/bladey-api.svg?style=flat-square"/></a>
+    <a href="https://david-dm.org/SwitchbladeBot/bladey-api"><img src="https://david-dm.org/SwitchbladeBot/bladey-api/status.svg?style=flat-square"/></a>
   </p>
 </div>
 
