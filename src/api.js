@@ -1,6 +1,7 @@
 // Load Express, CORS and discord.js
 const express = require('express')
 const app = express()
+require('express-ws')(app)
 const cors = require('cors')
 const { Client } = require('discord.js')
 

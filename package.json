@@ -29,6 +29,7 @@
     "cors": "^2.8.4",
     "discord.js": "^11.4.2",
     "express": "^4.16.3",
+    "express-ws": "^4.0.0",
     "mongoose": "^5.2.14",
     "mongoose-findorcreate": "^3.0.0"
   },
@@ -44,3 +45,4 @@
     ]
   }
 }
+  
