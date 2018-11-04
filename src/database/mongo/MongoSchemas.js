@@ -19,5 +19,19 @@ module.exports = {
     _id: String,
     prefix: { type: String, default: process.env.PREFIX },
     language: { type: String, default: 'en-US' }
+  }),
+
+  // Background Schema
+  Background: new Schema({
+    _id: String,
+    displayName: String,
+    description: String,
+    fullSizeURL: String,
+    croppedURL: String,
+    tags: Array,
+    disabled: { type: Boolean, default: false},
+    hidden: { type: Boolean, default: false},
+    purchasable: { type: Boolean, default: true},
+    price: { type: Number, default: 0}
   })
 }
