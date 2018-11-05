@@ -10,36 +10,27 @@ module.exports = class Route {
 
     this.name = 'RouteName'
 
+    this.subRoutes = null
     this.requirements = null
     this.parentRoute = parentRoute
   }
 
   get path () {
-    return `${this.parentRoute || ''}/${this.name}`
+    return `${this.parentRoute ? this.parentRoute.path : ''}/${this.name}`
+  }
+
+  _register (app) {
+    if (this.subRoutes) {
+      this.subRoutes.forEach(route => {
+        route._register(app)
+      })
+    }
+
+    this.register(app)
   }
 
   /**
-   * Return an express Router with routes information
-   * @returns {express.Router}
+   * Registers express Router with routes information
    */
-  load () {
-    return null
-  }
-
-  /**
-   * Returns true if it can load
-   * @returns {boolean} Whether this route can load
-   */
-  canLoad () {
-    return true
-  }
-
-  /**
-   * Returns true if it can run
-   * @param {Array<string>} args - Request arguments
-   * @returns {boolean} Whether this route can run
-   */
-  handleRequirements (args) {
-    return this.requirements ? this.requirements.handle(args) : true
-  }
+  register (app) {}
 }
