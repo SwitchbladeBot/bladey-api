@@ -15,7 +15,12 @@ module.exports = class Backgrounds extends Route {
 
       res.json({ backgrounds })
     })
+    router.get('/:id', async (req, res) => {
+      const id = req.params.id
+      const background = await this.client.database.backgrounds.get(id)
 
+      res.json({ background })
+    })
     app.use(this.path, router)
   }
 }
