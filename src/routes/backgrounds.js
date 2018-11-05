@@ -1,24 +1,21 @@
 const { Route } = require('../index')
 const { Router } = require('express')
 
-
-
-module.exports = class Background extends Route {
+module.exports = class Backgrounds extends Route {
   constructor (client) {
     super(client)
-    this.name = 'background'
+    this.name = 'backgrounds'
   }
-  register (app) {
-      const router = Router()
 
-      // Get backgrounds
-      router.get('/', async (req, res) => {
-         // const bgs = await this.client.database.backgrounds.findAll()
-        res.json({"oao":"oao"})
-      })
-    
-    
-      
+  register (app) {
+    const router = Router()
+
+    router.get('/', async (req, res) => {
+      const backgrounds = await this.client.database.backgrounds.findAll()
+
+      res.json({ backgrounds })
+    })
+
     app.use(this.path, router)
   }
 }
