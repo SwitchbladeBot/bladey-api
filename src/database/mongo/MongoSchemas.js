@@ -8,7 +8,7 @@ module.exports = {
     lastDaily: { type: Number, default: 0 },
     globalXp: { type: Number, default: 0 },
     personalText: { type: String, default: 'Did you know you can edit this in the future dashboard or using the personaltext command? :o' },
-    blacklisted: { type: Boolean, default: false },
+    blacklisted: {type: Boolean, default: false},
     favColor: { type: String, default: process.env.EMBED_COLOR },
     rep: { type: Number, default: 0 },
     lastRep: { type: Number, default: 0 }
@@ -24,11 +24,11 @@ module.exports = {
   // Background Schema
   Background: new Schema({
     _id: String,
-    displayName: String,
-    description: String,
-    fullSizeURL: String,
-    croppedURL: String,
-    tags: Array,
+    displayName: { type: String, default: 'Default' },
+    description: { type: String, default: 'default background' },
+    fullSizeURL: { type: String, default: 'https://i.imgur.com/T0vfmnF.jpg' },
+    croppedURL: { type: String, default: 'https://i.imgur.com/F9iKKLT.png' },
+    tags: { type: String, default: 'off' },
     disabled: { type: Boolean, default: false },
     hidden: { type: Boolean, default: false },
     purchasable: { type: Boolean, default: true },
