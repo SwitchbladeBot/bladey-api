@@ -19,7 +19,7 @@ module.exports = class Guilds extends Route {
           return res.json(common)
         }
       }
-      res.status(400).json({error: 'Invalid request'})
+      res.status(400).json({ error: 'Invalid request' })
     })
 
     /**
@@ -55,9 +55,9 @@ module.exports = class Guilds extends Route {
       const guild = this.client.guilds.get(req.params.guildId)
       if (guild) {
         const { id, name, icon, memberCount } = guild
-        return res.json({id, name, icon, memberCount})
+        return res.json({ id, name, icon, memberCount })
       }
-      res.status(404).json({error: 'Guild not found'})
+      res.status(404).json({ error: 'Guild not found' })
     })
 
     app.use(this.path, router)

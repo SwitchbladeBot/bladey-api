@@ -62,7 +62,7 @@ module.exports = class Contributors extends Route {
           }
         }).filter(r => r.members.length > 0)
 
-      res.json({roles: contributorRoles})
+      res.json({ roles: contributorRoles })
     })
 
     app.use(this.path, router)

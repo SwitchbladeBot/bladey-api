@@ -17,7 +17,7 @@ module.exports = class EndpointUtils {
                 req.user = user
                 return next()
               } catch (e) {
-                return res.status(401).json({error: 'Invalid Bearer token'})
+                return res.status(401).json({ error: 'Invalid Bearer token' })
               }
             }
             break
@@ -28,9 +28,9 @@ module.exports = class EndpointUtils {
             }
             break
         }
-        return res.status(401).json({error: 'Invalid Authentication header'})
+        return res.status(401).json({ error: 'Invalid Authentication header' })
       }
-      return res.status(401).json({error: 'Missing Authentication header'})
+      return res.status(401).json({ error: 'Missing Authentication header' })
     }
   }
 
