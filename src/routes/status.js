@@ -10,7 +10,7 @@ module.exports = class Status extends Route {
   load () {
     const router = Router()
 
-    /** 
+    /**
      * @api {get} /status Status of the API (200 = default)
      * @apiName Status
      * @apiGroup Status
