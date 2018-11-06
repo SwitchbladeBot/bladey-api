@@ -19,7 +19,11 @@ module.exports = class Backgrounds extends Route {
       const id = req.params.id
       const background = await this.client.database.backgrounds.findOne(id)
 
-      res.json({ background })
+      if (!background) {
+        res.json({ code: 404, message: 'Background Not Found.' })
+      } else {
+        res.json({ background })
+      }
     })
     app.use(this.path, router)
   }
