@@ -22,7 +22,7 @@ module.exports = class Status extends Route {
      *     {"code": 200, "message": "OK"}
      */
     router.get('/', async (req, res) => {
-      res.json({code: 200, message: 'OK'})
+      res.json({ code: 200, message: 'OK' })
     })
 
     return router
