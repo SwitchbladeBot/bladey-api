@@ -9,6 +9,9 @@
 </div>
 
 ## Setting up a development environment
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/SwitchbladeBot/bladey-api.svg)](https://greenkeeper.io/)
+
 **0. Fork the repository** (You don't have to do this if you're part of our organization)
 
 **1. Clone your fork**
