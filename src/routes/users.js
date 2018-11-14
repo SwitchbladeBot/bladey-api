@@ -46,7 +46,7 @@ class Economy extends Route {
     router.get('/money/:id', EndpointUtils.authenticate(), EndpointUtils.handleUser(this), async (req, res) => {
       const id = req.id
       const { money, lastDaily } = await this.client.database.users.get(id)
-      res.json({ money, lastDaily })
+      res.status(200).json({ money, lastDaily })
     })
 
     app.use(this.path, router)
